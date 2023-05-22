@@ -13,7 +13,7 @@ import jakarta.persistence.Table
 import java.math.BigDecimal
 
 @Entity
-@Table(name = "cliente")
+//@Table(name = "cliente")
 data class Customer(
     @Column(nullable = false)
     var firstName: String = "",
