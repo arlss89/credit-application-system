@@ -24,7 +24,7 @@ data class Credit (
 
     @Column(nullable = false)
     @JsonFormat(pattern = "yyyy-mm-dd", shape = JsonFormat.Shape.STRING)
-    val dayFirstInstallment: LocalDate,
+    val dayFirstInstallment: LocalDate = LocalDate.now(),
 
     @Column(nullable = false)
     val numberOfInstallment: Int = 0,

@@ -9,9 +9,7 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.OneToMany
-import jakarta.persistence.Table
 import java.math.BigDecimal
-import me.dio.credit.application.system.dto.response.CustomerView
 
 @Entity
 //@Table(name = "cliente")
