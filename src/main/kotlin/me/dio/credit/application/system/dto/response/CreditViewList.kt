@@ -1,4 +1,4 @@
-package me.dio.credit.application.system.dto
+package me.dio.credit.application.system.dto.response
 
 import java.math.BigDecimal
 import java.util.UUID

@@ -1,10 +1,11 @@
 package me.dio.credit.application.system.controller
 
+import jakarta.validation.Valid
 import java.util.*
 import java.util.stream.Collectors
-import me.dio.credit.application.system.dto.CreditDto
-import me.dio.credit.application.system.dto.CreditView
-import me.dio.credit.application.system.dto.CreditViewList
+import me.dio.credit.application.system.dto.request.CreditDto
+import me.dio.credit.application.system.dto.response.CreditView
+import me.dio.credit.application.system.dto.response.CreditViewList
 import me.dio.credit.application.system.service.impl.CreditService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -31,7 +32,7 @@ class CreditResource (private val creditService: CreditService) {
 
     @GetMapping("/{creditCode}")
     fun findByCreditCode(
-        @RequestParam(value = "customerID") customerId: Long,
+        @RequestParam(value = "customerId") customerId: Long,
         @PathVariable creditCode: UUID
     ): ResponseEntity<CreditView?> {
         val credit = this.creditService.findByCreditCode(customerId, creditCode)
@@ -42,11 +43,11 @@ class CreditResource (private val creditService: CreditService) {
     }
 
     @PostMapping
-    fun saveCredit(@RequestBody creditDto: CreditDto): ResponseEntity<String> {
+    fun saveCredit(@RequestBody @Valid creditDto: CreditDto): ResponseEntity<String> {
         val credit = this.creditService.save(creditDto.toEntity())
 
         return ResponseEntity.status(HttpStatus.CREATED)
-            .body("Credit ${credit.creditCode} - Customer ${credit.customer} saved" )
+            .body("Credit ${credit.creditCode} - Customer ${credit.customer.toString()} saved" )
     }
 
 }

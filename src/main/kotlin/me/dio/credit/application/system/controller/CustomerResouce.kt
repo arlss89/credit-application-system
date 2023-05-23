@@ -1,8 +1,9 @@
 package me.dio.credit.application.system.controller
 
-import me.dio.credit.application.system.dto.CustomerDto
-import me.dio.credit.application.system.dto.CustomerUpdateDto
-import me.dio.credit.application.system.dto.CustomerView
+import jakarta.validation.Valid
+import me.dio.credit.application.system.dto.request.CustomerDto
+import me.dio.credit.application.system.dto.request.CustomerUpdateDto
+import me.dio.credit.application.system.dto.response.CustomerView
 import me.dio.credit.application.system.service.impl.CustomerService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -53,8 +54,10 @@ class CustomerResouce(
     }
 
     @PatchMapping
-    fun updateCustomer(@RequestParam(value = "customerId") id: Long,
-                       customerUpdateDto: CustomerUpdateDto
+    @Valid
+    fun updateCustomer(
+        @RequestParam(value = "customerId") id: Long,
+        @RequestBody @Valid customerUpdateDto: CustomerUpdateDto
     ): ResponseEntity<CustomerView> {
         val customer = this.customerService.findByID(id)
         val customerToUpdate = customerUpdateDto.toEntity(customer)

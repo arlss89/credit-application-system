@@ -11,6 +11,7 @@ import jakarta.persistence.Id
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 import java.math.BigDecimal
+import me.dio.credit.application.system.dto.response.CustomerView
 
 @Entity
 //@Table(name = "cliente")
@@ -47,5 +48,10 @@ data class Customer(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
-)
+
+) {
+    override fun toString(): String {
+        return "firstName='$firstName', lastName='$lastName', income=$income"
+    }
+}
 

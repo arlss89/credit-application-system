@@ -1,5 +1,6 @@
 package me.dio.credit.application.system.entity
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Enumerated
@@ -22,6 +23,7 @@ data class Credit (
     val creditValue: BigDecimal = BigDecimal.ZERO,
 
     @Column(nullable = false)
+    @JsonFormat(pattern = "yyyy-mm-dd", shape = JsonFormat.Shape.STRING)
     val dayFirstInstallment: LocalDate,
 
     @Column(nullable = false)

@@ -1,4 +1,4 @@
-package me.dio.credit.application.system.dto
+package me.dio.credit.application.system.dto.response
 
 import java.math.BigDecimal
 import me.dio.credit.application.system.entity.Customer
@@ -21,4 +21,10 @@ class CustomerView (
         zipCode = customer.address.zipCode,
         street = customer.address.street
     )
+
+    override fun toString(): String {
+        return "firstName='$firstName', lastName='$lastName', cpf='$cpf', income=$income, email='$email', zipCode='$zipCode', street='$street'"
+    }
+
+
 }
