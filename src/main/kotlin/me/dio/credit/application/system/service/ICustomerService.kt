@@ -8,7 +8,7 @@ interface ICustomerService {
 
     fun findByID(id: Long): Customer
 
-    fun delete(id: Long): Boolean
+    fun delete(id: Long)
 
     fun existsById(id: Long): Boolean
 }

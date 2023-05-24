@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.ResponseStatus
 
 @Controller
 @RequestMapping("/api/customers")
@@ -40,18 +41,8 @@ class CustomerResouce(
     }
 
     @DeleteMapping("/{id}")
-    fun deleteCustomer(@PathVariable id: Long): ResponseEntity<HttpStatus> {
-        val success = this.customerService.existsById(id).apply {
-            this@CustomerResouce.customerService.delete(id)
-        }
-        val status = if (success) {
-            HttpStatus.OK
-        } else {
-            HttpStatus.NOT_FOUND
-        }
-
-        return ResponseEntity.status(status).body(status)
-    }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteCustomer(@PathVariable id: Long) = this.customerService.delete(id)
 
     @PatchMapping
     @Valid
