@@ -1,0 +1,26 @@
+spring:
+
+  #Security Settings for one demo
+  security:
+    user:
+      name: demo
+      password: demo
+      roles: USERS
+
+  datasource:
+    url: jdbc:h2:mem:credit_application_system_db
+    username: alyson
+    password:
+  jpa:
+    show-sql: true
+#    hibernate:
+    properties:
+      hibernate.format_sql: true
+#      ddl-auto: "create-drop"
+  h2:
+    console:
+      enabled: true
+      path: /console-db
+      settings:
+        trace: false
+        web-allow-others: false
