@@ -59,7 +59,7 @@ class CustomerResourceTest {
     )
       .andExpect(MockMvcResultMatchers.status().isCreated)
       .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("Alyson"))
-      .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("Reos"))
+      .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("Reis"))
       .andExpect(MockMvcResultMatchers.jsonPath("$.cpf").value("28475934625"))
       .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("alyson@mail.com"))
       .andExpect(MockMvcResultMatchers.jsonPath("$.income").value("1000.0"))
@@ -130,7 +130,7 @@ class CustomerResourceTest {
     )
       .andExpect(MockMvcResultMatchers.status().isOk)
       .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("Alyson"))
-      .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("Alyson"))
+      .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("Reis"))
       .andExpect(MockMvcResultMatchers.jsonPath("$.cpf").value("28475934625"))
       .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("alyson@mail.com"))
       .andExpect(MockMvcResultMatchers.jsonPath("$.income").value("1000.0"))
@@ -214,7 +214,7 @@ class CustomerResourceTest {
     )
       .andExpect(MockMvcResultMatchers.status().isOk)
       .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("AlysonUpdated"))
-      .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("ReisUpdate"))
+      .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("ReisUpdated"))
       .andExpect(MockMvcResultMatchers.jsonPath("$.cpf").value("28475934625"))
       .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("alyson@mail.com"))
       .andExpect(MockMvcResultMatchers.jsonPath("$.income").value("5000.0"))
@@ -254,7 +254,7 @@ class CustomerResourceTest {
     firstName: String = "Alyson",
     lastName: String = "Reis",
     cpf: String = "28475934625",
-    email: String = "alyosn@mail.com",
+    email: String = "alyson@mail.com",
     income: BigDecimal = BigDecimal.valueOf(1000.0),
     password: String = "1234",
     zipCode: String = "000000",
@@ -271,11 +271,11 @@ class CustomerResourceTest {
   )
 
   private fun builderCustomerUpdateDto(
-    firstName: String = "AlysonUpdate",
-    lastName: String = "LastNameUpdate",
+    firstName: String = "AlysonUpdated",
+    lastName: String = "ReisUpdated",
     income: BigDecimal = BigDecimal.valueOf(5000.0),
     zipCode: String = "45656",
-    street: String = "Rua rua updated"
+    street: String = "Rua Updated"
   ): CustomerUpdateDto = CustomerUpdateDto(
     firstName = firstName,
     lastName = lastName,

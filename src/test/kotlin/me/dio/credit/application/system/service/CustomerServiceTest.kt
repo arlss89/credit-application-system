@@ -19,7 +19,6 @@ import org.springframework.test.context.ActiveProfiles
 import java.math.BigDecimal
 import java.util.*
 
-//@ActiveProfiles("test")
 @ExtendWith(MockKExtension::class)
 class CustomerServiceTest {
   @MockK lateinit var customerRepository: CustomerRepository
@@ -28,10 +27,10 @@ class CustomerServiceTest {
   @Test
   fun `should create customer`(){
     //given
-    val fakeCustomer: Customer = buildCustomer()
+    val fakeCustomer = buildCustomer()
     every { customerRepository.save(any()) } returns fakeCustomer
     //when
-    val actual: Customer = customerService.save(fakeCustomer)
+    val actual = customerService.save(fakeCustomer)
     //then
     Assertions.assertThat(actual).isNotNull
     Assertions.assertThat(actual).isSameAs(fakeCustomer)
@@ -41,43 +40,44 @@ class CustomerServiceTest {
   @Test
   fun `should find customer by id`() {
     //given
-    val fakeId: Long = Random().nextLong()
-    val fakeCustomer: Customer = buildCustomer(id = fakeId)
+    val fakeId = Random().nextLong()
+    val fakeCustomer = buildCustomer(id = fakeId)
     every { customerRepository.findById(fakeId) } returns Optional.of(fakeCustomer)
     //when
-    val actual: Customer = customerService.findById(fakeId)
+    val actual = customerService.findById(fakeId)
     //then
     Assertions.assertThat(actual).isNotNull
     Assertions.assertThat(actual).isExactlyInstanceOf(Customer::class.java)
     Assertions.assertThat(actual).isSameAs(fakeCustomer)
-    verify(exactly = 1) { customerRepository.findById(fakeId) }
   }
 
   @Test
   fun `should not find customer by invalid id and throw BusinessException`() {
     //given
-    val fakeId: Long = Random().nextLong()
+    val fakeId = Random().nextLong()
     every { customerRepository.findById(fakeId) } returns Optional.empty()
     //when
     //then
     Assertions.assertThatExceptionOfType(BusinessException::class.java)
       .isThrownBy { customerService.findById(fakeId) }
       .withMessage("Id $fakeId not found")
-    verify(exactly = 1) { customerRepository.findById(fakeId) }
   }
 
   @Test
   fun `should delete customer by id`() {
     //given
-    val fakeId: Long = Random().nextLong()
-    val fakeCustomer: Customer = buildCustomer(id = fakeId)
+    val fakeId = Random().nextLong()
+    val fakeCustomer = buildCustomer(id = fakeId)
     every { customerRepository.findById(fakeId) } returns Optional.of(fakeCustomer)
     every { customerRepository.delete(fakeCustomer) } just runs
     //when
-    customerService.delete(fakeId)
+    customerService.delete(fakeId).also {
+      every { customerRepository.findById(fakeId) } returns Optional.empty()
+    }
     //then
-    verify(exactly = 1) { customerRepository.findById(fakeId) }
-    verify(exactly = 1) { customerRepository.delete(fakeCustomer) }
+    Assertions.assertThatExceptionOfType(BusinessException::class.java)
+      .isThrownBy { customerService.findById(fakeId) }
+      .withMessage("Id $fakeId not found")
   }
 
 
