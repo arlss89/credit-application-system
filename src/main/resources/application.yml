@@ -13,14 +13,16 @@ spring:
     password:
   jpa:
     show-sql: true
-#    hibernate:
+    #hibernate:
     properties:
       hibernate.format_sql: true
-#      ddl-auto: "create-drop"
   h2:
     console:
       enabled: true
-      path: /console-db
+      path: /h2-console
       settings:
         trace: false
         web-allow-others: false
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
