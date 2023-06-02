@@ -15,8 +15,8 @@ import java.math.BigDecimal
 import java.time.LocalDate
 import java.time.Month
 import java.util.*
+import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding
 
-@ActiveProfiles("test")
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class CreditRepositoryTest {
@@ -57,7 +57,7 @@ class CreditRepositoryTest {
     //when
     val creditList: List<Credit> = creditRepository.findAllByCustomerId(customerId)
     //then
-    Assertions.assertThat(creditList).isNotEmpty
+    Assertions.assertThat(creditList.toList().isNotEmpty())
     Assertions.assertThat(creditList.size).isEqualTo(2)
     Assertions.assertThat(creditList).contains(credit1, credit2)
   }
